@@ -1,0 +1,13 @@
+# Ignorer les fichiers de configuration locaux
+.vscode/
+.idea/
+*.iml
+
+# Ignorer les fichiers générés automatiquement
+*.log
+*.class
+*.jar
+
+# Exclure les dépendances externes
+node_modules/
+vendor/
