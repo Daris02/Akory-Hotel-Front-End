@@ -33,15 +33,19 @@ function donutChart() {
   window.donutChart = Morris.Donut({
     element: "donut-chart",
     data: [
-      { label: "Normal Room", value: 50 },
-      { label: "Ac Room", value: 25 },
-      { label: "Special Room", value: 5 },
-      { label: "DoubleBed room", value: 10 },
-      { label: "Video Room", value: 10 },
+      { label: "Room with view", value: 31 },
+      { label: "Connecting room", value: 31 },
+      { label: "Executive room", value: 31 },
+      { label: "Disabled room", value: 31 },
+      { label: "Suit room", value: 31 },
+      { label: "Twin", value: 30 },
+      { label: "Single Room", value: 30 },
+      { label: "Family suite", value: 30 },
+      { label: "Triple room", value:30 }
     ],
     backgroundColor: "#f2f5fa",
     labelColor: "#009688",
-    colors: ["#0BA462", "#39B580", "#67C69D", "#95D7BB"],
+    colors: ["#f6a625", "#f44336", "#ff8c00", "#ffc107","#42a5f5","#00bcd4","#4caf50","#9c27b0","#795548"],
     resize: true,
     redraw: true,
   });
