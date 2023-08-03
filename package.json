@@ -1,0 +1,20 @@
+{
+  "name": "akory-hotel-front-end",
+  "version": "1.0.0",
+  "description": "This repository contains the User interface of our final exam project about `hotel room management`",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daris02/Akory-Hotel-Front-End.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daris02/Akory-Hotel-Front-End/issues"
+  },
+  "homepage": "https://github.com/Daris02/Akory-Hotel-Front-End#readme"
+}
