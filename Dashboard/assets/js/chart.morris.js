@@ -1,3 +1,5 @@
+const URL = "http://localhost:8000";
+
 $(document).ready(function () {
   lineChart();
   donutChart();
@@ -8,48 +10,92 @@ $(document).ready(function () {
     window.pieChart.redraw();
   });
 });
+
+const dataList = $("#allBooking");
+const bookings = $("#totalBooking");
+const roomsAvailable = $('#roomsAvailable')
+
+async function getTotalBookings() {
+  const response = await fetch(`${URL}/reservations`)
+    .then((res) => res.json())
+    .then((data) => {
+      bookings.append(`${data.length}`);
+    });
+}
+
+async function getTotalRoomsAvailable() {
+  const response = await fetch(`${URL}/RoomsAvailableForAHotel`)
+    .then((res) => res.json())
+    .then((data) => {
+      roomsAvailable.append(`${data.length}`);
+    });
+}
+
+getTotalBookings();
+getTotalRoomsAvailable();
+
 function lineChart() {
   window.lineChart = Morris.Line({
     element: "line-chart",
     data: [
-      { y: "2006", a: 100, b: 90 },
-      { y: "2007", a: 75, b: 65 },
-      { y: "2008", a: 50, b: 40 },
-      { y: "2009", a: 75, b: 65 },
-      { y: "2010", a: 50, b: 40 },
-      { y: "2011", a: 75, b: 65 },
-      { y: "2012", a: 100, b: 90 },
+      { y: "2006", a: 100 },
+      { y: "2007", a: 75 },
+      { y: "2008", a: 50 },
+      { y: "2009", a: 75 },
+      { y: "2010", a: 50 },
+      { y: "2011", a: 75 },
+      { y: "2012", a: 100 },
     ],
     xkey: "y",
-    ykeys: ["a", "b"],
-    labels: ["Series A", "Series B"],
-    lineColors: ["#009688", "#cdc6c6"],
+    ykeys: ["a"],
+    labels: ["Series A"],
+    lineColors: ["#009688"],
     lineWidth: "3px",
     resize: true,
     redraw: true,
   });
 }
-function donutChart() {
+
+let Solo = 0;
+let Twin = 0;
+let Family = 0;
+let Vip = 0;
+let Rooms = { Solo, Twin, Family, Vip };
+
+async function donutChart() {
+  const response = await fetch(`${URL}/CurrentyOccupiedRoomsList`)
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach((room) => {
+      if (room.room_type == "solo") {
+        Rooms.Solo++;
+      } else if (room.room_type == "twin") {
+        Rooms.Twin++;
+      } else if (room.room_type == "family") {
+        Rooms.Family++;
+      } else if (room.room_type == "VIP") {
+        Rooms.Vip++;
+      }
+    });
+  });
+
   window.donutChart = Morris.Donut({
     element: "donut-chart",
     data: [
-      { label: "Room with view", value: 31 },
-      { label: "Connecting room", value: 31 },
-      { label: "Executive room", value: 31 },
-      { label: "Disabled room", value: 31 },
-      { label: "Suit room", value: 31 },
-      { label: "Twin", value: 30 },
-      { label: "Single Room", value: 30 },
-      { label: "Family suite", value: 30 },
-      { label: "Triple room", value:30 }
+      { label: "Single Room", value: Rooms.Solo },
+      { label: "Twin", value: Rooms.Twin },
+      { label: "Family suite", value: Rooms.Family },
+      { label: "VIP room", value: Rooms.Vip },
     ],
     backgroundColor: "#f2f5fa",
     labelColor: "#009688",
-    colors: ["#f6a625", "#f44336", "#ff8c00", "#ffc107","#42a5f5","#00bcd4","#4caf50","#9c27b0","#795548"],
+    colors: ["#f6a625", "#2daf9e", "#f44336", "#2579f6"],
     resize: true,
     redraw: true,
   });
 }
+
+
 function pieChart() {
   var paper = Raphael("pie-chart");
   paper.piechart(100, 100, 90, [18.373, 18.686, 2.867, 23.991, 9.592, 0.213], {
@@ -64,31 +110,33 @@ function pieChart() {
   });
 }
 
-fetch('http://localhost:8000/ReservationListDescByHotel')
-  .then(res => res.json())
-  .then(data => {
-    let dataList = $('#allBooking');
-    data.forEach(booking => {
+fetch(`${URL}/ResrvationsWithCustomerInfo`)
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach((booking) => {
       dataList.append(
         `
           <tr>
             <td class="text-nowrap">
               <div>BKG-${booking.id}</div>
             </td>
-            <td class="text-nowrap">${booking.id_customer}</td>
-            <td><a href="/cdn-cgi/l/${booking.id_customer}" class="__cf_email__"
+            <td class="text-nowrap">${booking.customer_firstname} ${booking.customer_lastname}</td>
+            <!-- <td><a href="https://gmail.${booking.email}" class="__cf_email__"
                 data-cfemail="3743585a5a4e55524559565b77524f565a475b521954585a">[email&#160;protected]</a>
+            </td> -->
+            <td>
+                <div>${booking.email}</div>
             </td>
-            <td>12414786454545</td>
-            <td class="text-center">Double</td>
+            <td>${booking.principal_contact}</td>
+            <td class="text-center">${booking.room_type}</td>
             <td class="text-right">
-              <div>631-254-6480</div>
+              <div>${booking.emergency_number}</div>
             </td>
             <td class="text-center">
               <span class="badge badge-pill bg-success inv-badge">INACTIVE</span>
             </td>
           </tr>
         `
-      )
+      );
     });
-  })
+  });
