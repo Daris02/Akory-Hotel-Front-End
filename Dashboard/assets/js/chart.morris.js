@@ -63,3 +63,32 @@ function pieChart() {
     ],
   });
 }
+
+fetch('http://localhost:8000/ReservationListDescByHotel')
+  .then(res => res.json())
+  .then(data => {
+    let dataList = $('#allBooking');
+    data.forEach(booking => {
+      dataList.append(
+        `
+          <tr>
+            <td class="text-nowrap">
+              <div>BKG-${booking.id}</div>
+            </td>
+            <td class="text-nowrap">${booking.id_customer}</td>
+            <td><a href="/cdn-cgi/l/${booking.id_customer}" class="__cf_email__"
+                data-cfemail="3743585a5a4e55524559565b77524f565a475b521954585a">[email&#160;protected]</a>
+            </td>
+            <td>12414786454545</td>
+            <td class="text-center">Double</td>
+            <td class="text-right">
+              <div>631-254-6480</div>
+            </td>
+            <td class="text-center">
+              <span class="badge badge-pill bg-success inv-badge">INACTIVE</span>
+            </td>
+          </tr>
+        `
+      )
+    });
+  })
