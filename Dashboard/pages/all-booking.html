@@ -164,15 +164,15 @@
 						<div class="card card-table">
 							<div class="card-body booking_card">
 								<div class="table-responsive">
-									<table class="datatable table table-stripped table table-hover table-center mb-0">
+									<table class="datatable table table-stripped table table-hover table-center mb-0" id="myTable">
 										<thead>
 											<tr>
 												<th>Booking ID</th>
 												<th>Name</th>
 												<th>Room Type</th>
 												<th>Total Numbers</th>
-												<th>Date</th>
-												<th>Time</th>
+												<!-- <th>Date</th> -->
+												<!-- <th>Time</th> -->
 												<th>Arrival Date</th>
 												<th>Depature Date</th>
 												<th>Email ID</th>
@@ -181,8 +181,8 @@
 												<th class="text-right">Actions</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
+										<tbody id="tbody">
+											<!-- <tr>
 												<td>BKG-0001</td>
 												<td>
 													<h2 class="table-avatar">
@@ -331,7 +331,7 @@
 														<div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="edit-booking.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a> <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Delete</a> </div>
 													</div>
 												</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>
@@ -363,6 +363,7 @@
 	<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="../assets/plugins/raphael/raphael.min.js"></script>
 	<script src="../assets/js/script.js"></script>
+	<script src="../assets/js/scriptAllbooking.js"></script>
 </body>
 
 </html>
