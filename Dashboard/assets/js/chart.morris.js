@@ -114,6 +114,12 @@ fetch(`${URL}/ResrvationsWithCustomerInfo`)
   .then((res) => res.json())
   .then((data) => {
     data.forEach((booking) => {
+      let status = '<span class="badge badge-pill bg-success badge">ARRIVED</span>';
+      if (booking.is_cancelled == false) {
+        status = '<span class="badge badge-pill bg-warning badge">PENDING</span>'
+      } else if (booking.is_cancelled == true) {
+        status = '<span class="badge badge-pill bg-danger badge">CANCELLED</span>'
+      }
       dataList.append(
         `
           <tr>
@@ -133,7 +139,7 @@ fetch(`${URL}/ResrvationsWithCustomerInfo`)
               <div>${booking.emergency_number}</div>
             </td>
             <td class="text-center">
-              <span class="badge badge-pill bg-success inv-badge">INACTIVE</span>
+              ${status}
             </td>
           </tr>
         `
