@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Daris02/Akory-Hotel-Front-End/issues"
   },
-  "homepage": "https://github.com/Daris02/Akory-Hotel-Front-End#readme"
+  "homepage": "https://github.com/Daris02/Akory-Hotel-Front-End#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "datatables.net-dt": "^1.13.6"
+  }
 }
