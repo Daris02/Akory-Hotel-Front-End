@@ -81,9 +81,9 @@
   if ($('[data-toggle="tooltip"]').length > 0) {
     $('[data-toggle="tooltip"]').tooltip();
   }
-  if ($(".datatable").length > 0) {
-    $(".datatable").DataTable({ bFilter: false });
-  }
+  // if ($(".datatable").length > 0) {
+  //   $(".datatable").DataTable({ bFilter: false });
+  // }
   if ($(".clickable-row").length > 0) {
     $(document).on("click", ".clickable-row", function () {
       window.location = $(this).data("href");
