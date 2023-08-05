@@ -11,9 +11,9 @@ $(document).ready(function () {
   });
 });
 
-const dataList = $("#allBooking");
+const allBooking = $("#allBooking");
 const bookings = $("#totalBooking");
-const roomsAvailable = $('#roomsAvailable')
+const roomsAvailable = $("#roomsAvailable");
 
 async function getTotalBookings() {
   const response = await fetch(`${URL}/reservations`)
@@ -64,20 +64,20 @@ let Rooms = { Solo, Twin, Family, Vip };
 
 async function donutChart() {
   const response = await fetch(`${URL}/CurrentyOccupiedRoomsList`)
-  .then((res) => res.json())
-  .then((data) => {
-    data.forEach((room) => {
-      if (room.room_type == "solo") {
-        Rooms.Solo++;
-      } else if (room.room_type == "twin") {
-        Rooms.Twin++;
-      } else if (room.room_type == "family") {
-        Rooms.Family++;
-      } else if (room.room_type == "VIP") {
-        Rooms.Vip++;
-      }
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((room) => {
+        if (room.room_type == "solo") {
+          Rooms.Solo++;
+        } else if (room.room_type == "twin") {
+          Rooms.Twin++;
+        } else if (room.room_type == "family") {
+          Rooms.Family++;
+        } else if (room.room_type == "VIP") {
+          Rooms.Vip++;
+        }
+      });
     });
-  });
 
   window.donutChart = Morris.Donut({
     element: "donut-chart",
@@ -95,7 +95,6 @@ async function donutChart() {
   });
 }
 
-
 function pieChart() {
   var paper = Raphael("pie-chart");
   paper.piechart(100, 100, 90, [18.373, 18.686, 2.867, 23.991, 9.592, 0.213], {
@@ -110,11 +109,20 @@ function pieChart() {
   });
 }
 
-fetch(`${URL}/ResrvationsWithCustomerInfo`)
+fetch(`${URL}/ReservationsWithCustomerInfo`)
   .then((res) => res.json())
   .then((data) => {
     data.forEach((booking) => {
-      dataList.append(
+      let status =
+        '<span class="badge badge-pill bg-success badge">ARRIVED</span>';
+      if (booking.is_cancelled == false) {
+        status =
+          '<span class="badge badge-pill bg-warning badge">PENDING</span>';
+      } else if (booking.is_cancelled == true) {
+        status =
+          '<span class="badge badge-pill bg-danger badge">CANCELLED</span>';
+      }
+      allBooking.append(
         `
           <tr>
             <td class="text-nowrap">
@@ -133,7 +141,7 @@ fetch(`${URL}/ResrvationsWithCustomerInfo`)
               <div>${booking.emergency_number}</div>
             </td>
             <td class="text-center">
-              <span class="badge badge-pill bg-success inv-badge">INACTIVE</span>
+              ${status}
             </td>
           </tr>
         `
