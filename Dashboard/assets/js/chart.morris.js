@@ -14,6 +14,7 @@ $(document).ready(function () {
 const allBooking = $("#allBooking");
 const bookings = $("#totalBooking");
 const roomsAvailable = $("#roomsAvailable");
+const totalOfCustomer = $("#totalOfCustomer");
 
 async function getTotalBookings() {
   const response = await fetch(`${URL}/reservations`)
@@ -22,6 +23,7 @@ async function getTotalBookings() {
       bookings.append(`${data.length}`);
     });
 }
+getTotalBookings();
 
 async function getTotalRoomsAvailable() {
   const response = await fetch(`${URL}/RoomsAvailableForAHotel`)
@@ -30,9 +32,16 @@ async function getTotalRoomsAvailable() {
       roomsAvailable.append(`${data.length}`);
     });
 }
-
-getTotalBookings();
 getTotalRoomsAvailable();
+
+async function getTotalCustomer() {
+  const response = await fetch(`${URL}/customers`)
+      .then((res) => res.json())
+      .then((data) => {
+        totalOfCustomer.append(`${data.length}`);
+      });
+}
+getTotalCustomer();
 
 function lineChart() {
   window.lineChart = Morris.Line({
@@ -82,10 +91,10 @@ async function donutChart() {
   window.donutChart = Morris.Donut({
     element: "donut-chart",
     data: [
-      { label: "Single Room", value: Rooms.Solo },
+      { label: "Single", value: Rooms.Solo },
       { label: "Twin", value: Rooms.Twin },
-      { label: "Family suite", value: Rooms.Family },
-      { label: "VIP room", value: Rooms.Vip },
+      { label: "Family", value: Rooms.Family },
+      { label: "VIP", value: Rooms.Vip },
     ],
     backgroundColor: "#f2f5fa",
     labelColor: "#009688",
