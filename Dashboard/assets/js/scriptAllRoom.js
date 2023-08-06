@@ -21,7 +21,7 @@ function displayAllRooms(rooms) {
 
         tbody.append(`
         <tr>
-          <td>CUST-${room.id}</td>
+          <td><h2>${room.number}</h2></td>
           <td>
             ${type}
           </td>
