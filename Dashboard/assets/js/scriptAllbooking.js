@@ -47,7 +47,7 @@ function displayAllBooking(bookings) {
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body text-center"> <img src="../assets/img/sent.png" alt="" width="50" height="46">
-                      <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
+                      <h3 class="delete_class">Are you sure want to delete this Booking</h3>
                       <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
                         <button type="submit" class="btn btn-danger">Delete</button>
                       </div>
