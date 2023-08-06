@@ -63,20 +63,20 @@ function displayAllCustomers(customers) {
                         <div class="row formtype">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="book_id">First Name</label>
-                                    <input class="form-control" id="book_id" type="text">
+                                    <label for="customer_name">First Name</label>
+                                    <input class="form-control" id="customer_name" value=${customer.name} type="text">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="sel1">Last Name</label>
-                                    <input type="text" class="form-control" id="sel1" name="sellist1">
+                                    <label for="customer_last_name">Last Name</label>
+                                    <input type="text" class="form-control" id="customer_last_name" value=${customer.last_name} name="sellist1">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="sel2">Gender</label>
-                                    <select class="form-control" id="sel2" name="sellist1">
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control" id="gender" value=${customer.gender} name="sellist1">
                                         <option>Male</option>
                                         <option>Female</option>
                                     </select>
@@ -84,38 +84,32 @@ function displayAllCustomers(customers) {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="princ_contact">Principal contact</label>
-                                    <input type="text" class="form-control" id="princ_contact" name="sellist1">
+                                    <label for="principal_contact">Principal contact</label>
+                                    <input type="text" class="form-control" id="principal_contact" value=${customer.principal_contact} name="sellist1">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="emg_contact">Emergency contact</label>
-                                    <input type="text" id="emg_contact" class="form-control">
+                                    <label for="emergency_contact">Emergency contact</label>
+                                    <input type="text" id="emergency_contact" value=${customer.emergency_number} class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="card_IN">CIN</label>
-                                    <input type="text" class="form-control" id="card_IN">
+                                    <label for="cin">CIN</label>
+                                    <input type="text" class="form-control" value=${customer.cin} id="cin">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <input type="text" id="address" class="form-control">
+                                    <input type="text" id="address" value=${customer.address} class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="usr">Email</label>
-                                    <input type="text" class="form-control" id="usr">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="rec_id">Receptionist ID</label>
-                                    <input type="text" id="rec_id" class="form-control">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" value=${customer.email} id="email">
                                 </div>
                             </div>
                         </div>
