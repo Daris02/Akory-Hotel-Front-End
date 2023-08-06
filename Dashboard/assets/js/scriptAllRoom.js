@@ -3,25 +3,29 @@ const URL = "http://localhost:8000";
 const tbody = $("#tbody");
 
 function displayAllRooms(rooms) {
-    let tab = ``;
+  let tab = ``;
 
-    rooms.forEach((room) => {
-        let type = '';
-        if (room.room_type == 'solo') {
-            type = '<div class="actions"> <h1 class="btn btn-sm bg-primary-light mr-2">SOLO</h1> </div>';
-        } else if (room.room_type == 'twin') {
-            type = '<div class="actions"> <h1 class="btn btn-sm bg-warning-light mr-2">TWIN</h1> </div>';
-        } else if (room.room_type == 'family') {
-            type = '<div class="actions"> <h1 class="btn btn-sm bg-success-light mr-2">FAMILY</h1> </div>';
-        } else if (room.room_type == 'VIP') {
-            type = '<div class="actions"> <h1 class="btn btn-sm bg-danger-light mr-2">VIP</h1> </div>';
-        }
+  rooms.forEach((room) => {
+    let type = "";
+    if (room.room_type == "solo") {
+      type =
+        '<div class="actions"> <h1 class="btn btn-sm bg-primary-light mr-2">SOLO</h1> </div>';
+    } else if (room.room_type == "twin") {
+      type =
+        '<div class="actions"> <h1 class="btn btn-sm bg-warning-light mr-2">TWIN</h1> </div>';
+    } else if (room.room_type == "family") {
+      type =
+        '<div class="actions"> <h1 class="btn btn-sm bg-success-light mr-2">FAMILY</h1> </div>';
+    } else if (room.room_type == "VIP") {
+      type =
+        '<div class="actions"> <h1 class="btn btn-sm bg-danger-light mr-2">VIP</h1> </div>';
+    }
 
-        let status = '<div class="actions"> <p class="btn btn-sm bg-secondary mr-2">Occuped OR Available</p> </div>';
+    let status = '<div class="actions"> <p class="btn btn-sm bg-secondary-light mr-2">Occuped OR Available</p> </div>';
 
-        tbody.append(`
+    tbody.append(`
         <tr>
-          <td><h2>${room.number}</h2></td>
+          <td><h2>${room.id}</h2></td>
           <td>
             ${type}
           </td>
@@ -56,58 +60,43 @@ function displayAllRooms(rooms) {
               <div class="modal-dialog modal-dialog-centered modal-lg h-100">
                 <div class="modal-content">
                     <div class="modal-body text-center">
-                      <form class="w-100" onSubmit={updateRoom()} >
-                        <h3 class="">Edit Customer</h3>
-                        <div class="row formtype">
+                      <form class="w-100" onSubmit={updateRoom(${room.id})} >
+                      <h3 class="">Edit Room ${room.id}</h3>
+                      <div class="row formtype">
                             <div class="col-md-4">
-                                <div class="form-group"><label for="number">Room Number</label>
-                                    <input class="form-control" type="text" id="number">
+                                <div class="form-group">
+                                  <label for="number_${room.id}">Room Number</label>
+                                  <input class="form-control" type="text" id="number_${room.id}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="sel1">Room Type</label>
-                                    <select class="form-control" id="sel1" name="sellist1">
-                                        <option>Select</option>
-                                        <option>Single</option>
-                                        <option>Double</option>
-                                        <option>Quad</option>
-                                        <option>King</option>
-                                        <option>Suite</option>
-                                        <option>Villa</option>
+                                    <label for="room_type_${room.id}">Room Type</label>
+                                    <select class="form-control" id="room_type_${room.id}" name="sellist1">
+                                        <option></option>
+                                        <option>solo</option>
+                                        <option>twin</option>
+                                        <option>family</option>
+                                        <option>VIP</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="sel2">Room capacity</label>
-                                    <input type="number" class="form-control" id="sel2" name="sellist1">
+                                    <label for="capacity_room_${room.id}">Room capacity</label>
+                                    <input type="number" class="form-control" id="capacity_room_${room.id}" name="capacity_room_${room.id}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="price">ID price</label>
-                                    <input type="text" id="price" class="form-control" id="usr">
+                                    <label for="price_${room.id}">Price</label>
+                                    <input type="text" id="price_${room.id}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="features">Room Features ID</label>
-                                    <input type="text" id="features" class="form-control" id="usr1">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="customFile">Hotel ID</label>
-                                    <div class="custom-file mb-3">
-                                        <input type="number" class="form-control" id="customFile" name="filename">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="comment">Message</label>
-                                    <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                                    <label for="features_${room.id}">Room Features ID</label>
+                                    <input type="text" id="features_${room.id}" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -125,19 +114,26 @@ function displayAllRooms(rooms) {
           </td>
         </tr>
         `);
-    })
+  });
 
-    $(document).ready(function () {
-        $('#myTable').DataTable();
-    });
+  $(document).ready(function () {
+    $("#myTable").DataTable();
+  });
 }
 
-fetch(`${URL}/rooms`)
-    .then((res) => res.json())
-    .then((data) => {
-        displayAllRooms(data);
-    });
+fetch(`${URL}/rooms`).then((res) => res.json()).then((data) => displayAllRooms(data));
 
-function updateRoom() {
-    alert('Edit room Send !');
+function updateRoom(id) {
+
+  fetch(`${URL}/room/${id}`, {
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      number: document.getElementById(`number_${id}`).value,
+      room_type: document.getElementById(`room_type_${id}`).value,
+      capacity_room: document.getElementById(`capacity_room_${id}`).value
+    })
+  }).then(res => res);
 }
