@@ -38,15 +38,16 @@ function displayAllBooking(bookings) {
           <td class="text-right">
             <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
               <div class="dropdown-menu dropdown-menu-right"> 
-                <a class="dropdown-item" href="edit-booking.html"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_asset_${booking.id}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset_${booking.id}"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
               </div>
             </div>
+
             <div id="delete_asset_${booking.id}" class="modal fade delete-modal" role="dialog">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body text-center"> <img src="../assets/img/sent.png" alt="" width="50" height="46">
-                      <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
+                      <h3 class="delete_class">Are you sure want to delete this Booking</h3>
                       <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
                         <button type="submit" class="btn btn-danger">Delete</button>
                       </div>
@@ -54,13 +55,63 @@ function displayAllBooking(bookings) {
                 </div>
               </div>
             </div>
+              
+            <div id="edit_asset_${booking.id}" class="modal fade delete-modal" role="dialog">
+              <div class="modal-dialog modal-dialog-centered modal-lg h-100">
+                <div class="modal-content">
+                    <div class="modal-body text-center h-100">
+                      <form class="w-100" onSubmit={updateBooking()} >
+                        <h3 class="">Edit Booking</h3>
+                        <div class="row formtype">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="customer">Customer</label>
+                              <input type="text" class="form-control" id="customer" name="customer">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="sel2">Room Number</label>
+                              <input type="number" class="form-control" id="sel2" name="sellist1">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="sel3">Total Members</label>
+                              <input type="number" class="form-control" id="sel3" name="sellist1">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="arrival_date">Arrival Date</label>
+                                <input type="datetime-local" id="arrival_date" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="departure_date">Depature Date</label>
+                                <input type="datetime-local" id="departure_date" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="m-t-20 d-flex justify-content-around">
+                            <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                            <button type="submit" class="btn btn-warning">Edit</button>
+                        </div>
+                      </form>
+                      
+                    </div>
+                </div>
+              </div>
+            </div>
+
           </td>
         </tr>
         `);
     })
     $(document).ready(function () {
       $('#myTable').DataTable();
-    })
+    });
 }
 
 fetch(`${URL}/ReservationsWithCustomerInfo`)
@@ -68,3 +119,7 @@ fetch(`${URL}/ReservationsWithCustomerInfo`)
   .then((data) => {
     displayAllBooking(data);
   });
+
+function updateBooking() {
+  alert('Edit Booking Send !');
+}
