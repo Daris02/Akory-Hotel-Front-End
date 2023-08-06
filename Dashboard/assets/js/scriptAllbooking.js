@@ -65,8 +65,8 @@ function displayAllBooking(bookings) {
                         <div class="row formtype">
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="sel1">Customer</label>
-                              <input type="text" class="form-control" id="sel1" name="sellist1">
+                              <label for="customer">Customer</label>
+                              <input type="text" class="form-control" id="customer" name="customer">
                             </div>
                           </div>
                           <div class="col-md-4">
@@ -81,16 +81,16 @@ function displayAllBooking(bookings) {
                               <input type="number" class="form-control" id="sel3" name="sellist1">
                             </div>
                           </div>
-                          <div class="col-md-4 mx-4">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label for="arrival_date">Arrival Date</label>
-                                <input type="datetime-local" id="arrival_date" class="form-contro">
+                                <input type="datetime-local" id="arrival_date" class="form-control">
                             </div>
                           </div>
-                          <div class="col-md-4 mx-4">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label for="departure_date">Depature Date</label>
-                                <input type="datetime-local" id="departure_date" class="form-contro">
+                                <input type="datetime-local" id="departure_date" class="form-control">
                             </div>
                           </div>
                         </div>
