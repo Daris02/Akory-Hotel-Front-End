@@ -5,19 +5,19 @@ const URL = "http://localhost:8000";
 const tbody = $("#tbody");
 
 function displayAllCustomers(customers) {
-    let tab = ``;
+  let tab = ``;
 
-    customers.forEach((customer) => {
-        let gender = '';
-        if (customer.gender == 'F') {
-            gender =
-                '<div class="actions"> <p class="btn btn-sm bg-danger-light mr-2">Female</p> </div>';
-        } else if (customer.gender == 'M') {
-            gender =
-                '<div class="actions"> <p class="btn btn-sm bg-primary-light mr-2">Male</p> </div>';
-        }
+  customers.forEach((customer) => {
+    let gender = "";
+    if (customer.gender == "F") {
+      gender =
+        '<div class="actions"> <p class="btn btn-sm bg-danger-light mr-2">Female</p> </div>';
+    } else if (customer.gender == "M") {
+      gender =
+        '<div class="actions"> <p class="btn btn-sm bg-primary-light mr-2">Male</p> </div>';
+    }
 
-        tbody.append(`
+    tbody.append(`
         <tr>
           <td>CUST-${customer.id}</td>
           <td>
@@ -58,58 +58,43 @@ function displayAllCustomers(customers) {
               <div class="modal-dialog modal-dialog-centered modal-lg h-100">
                 <div class="modal-content">
                     <div class="modal-body text-center h-100">
-                      <form class="w-100" onSubmit={updateCustomer()} >
+                      <form class="w-100" onSubmit={updateCustomer(${customer.id})} >
                         <h3 class="">Edit Customer</h3>
                         <div class="row formtype">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="customer_name">First Name</label>
-                                    <input class="form-control" id="customer_name" value=${customer.name} type="text">
+                                    <label for="name_${customer.id}">First Name</label>
+                                    <input class="form-control" id="name_${customer.id}" type="text">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="customer_last_name">Last Name</label>
-                                    <input type="text" class="form-control" id="customer_last_name" value=${customer.last_name} name="sellist1">
+                                    <label for="last_name_${customer.id}">Last Name</label>
+                                    <input type="text" class="form-control" id="last_name_${customer.id}" name="sellist1">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" id="gender" value=${customer.gender} name="sellist1">
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
+                                    <label for="principal_contact_${customer.id}">Principal contact</label>
+                                    <input type="text" class="form-control" id="principal_contact_${customer.id}" name="sellist1">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="principal_contact">Principal contact</label>
-                                    <input type="text" class="form-control" id="principal_contact" value=${customer.principal_contact} name="sellist1">
+                                    <label for="emergency_contact_${customer.id}">Emergency contact</label>
+                                    <input type="text" id="emergency_contact_${customer.id}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="emergency_contact">Emergency contact</label>
-                                    <input type="text" id="emergency_contact" value=${customer.emergency_number} class="form-control">
+                                    <label for="address_${customer.id}">Address</label>
+                                    <input type="text" id="address_${customer.id}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cin">CIN</label>
-                                    <input type="text" class="form-control" value=${customer.cin} id="cin">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" id="address" value=${customer.address} class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" value=${customer.email} id="email">
+                                    <label for="email_${customer.id}">Email</label>
+                                    <input type="email" id="email_${customer.id}" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -127,19 +112,32 @@ function displayAllCustomers(customers) {
           </td>
         </tr>
         `);
-    })
+  });
 
-    $(document).ready(function () {
-        $('#myTable').DataTable();
-    });
+  $(document).ready(function () {
+    $("#myTable").DataTable();
+  });
 }
 
 fetch(`${URL}/customers`)
-    .then((res) => res.json())
-    .then((data) => {
-        displayAllCustomers(data);
-    });
+  .then((res) => res.json())
+  .then((data) => {
+    displayAllCustomers(data);
+  });
 
-function updateCustomer() {
-    alert('Edit Customer Send !');
+function updateCustomer(id) {
+  fetch(`${URL}/customer/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: document.getElementById(`name_${id}`).value,
+      last_name: document.getElementById(`last_name_${id}`).value,
+      principal_contact: document.getElementById(`principal_contact_${id}`).value,
+      emergency_contact: document.getElementById(`emergency_contact_${id}`).value,
+      address: document.getElementById(`address_${id}`).value,
+      email: document.getElementById(`email_${id}`).value,
+    }),
+  }).then((res) => res);
 }

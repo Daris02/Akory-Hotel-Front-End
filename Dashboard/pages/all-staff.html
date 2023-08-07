@@ -219,23 +219,19 @@
 						<div class="card card-table">
 							<div class="card-body booking_card">
 								<div class="table-responsive">
-									<table class="datatable table table-stripped table table-hover table-center mb-0">
+									<table class="datatable table table-stripped table table-hover table-center mb-0" id="myTable">
 										<thead>
 											<tr>
-												<th>Name</th>
 												<th>Staff ID</th>
+												<th>Name</th>
 												<th>Email</th>
 												<th>Ph.Number</th>
-												<th>Join Date</th>
-												<th>Leaving Time</th>
-												<th>On Duty</th>
-												<th>Role</th>
-												<th>Status</th>
+												<th>Hotel Work</th>
 												<th class="text-right">Actions</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
+										<tbody id="tbody">
+										<!-- <tr>
 												<td>
 													<h2 class="table-avatar">
 														<a href="profile.html" class="avatar avatar-sm mr-2"><img
@@ -480,7 +476,7 @@
 														</div>
 													</div>
 												</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>
@@ -500,6 +496,7 @@
 	<script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="../assets/plugins/datatables/datatables.min.js"></script>
 	<script src="../assets/js/script.js"></script>
+	<script src="../assets/js/scriptRecptionist.js"></script>
 </body>
 
 </html>

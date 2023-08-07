@@ -9,10 +9,10 @@ function displayAllBooking(bookings) {
 
   bookings.forEach((booking) => {
     let status =
-      '<div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Arrived</a> </div>';
+      '<div class="actions"> <a href="#" class="btn btn-sm bg-warning-light mr-2">Pending</a> </div>';
     if (booking.is_cancelled == false) {
       status =
-        '<div class="actions"> <a href="#" class="btn btn-sm bg-warning-light mr-2">Pending</a> </div>';
+        '<div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Arrived</a> </div>';
     } else if (booking.is_cancelled == true) {
       status =
         '<div class="actions"> <a href="#" class="btn btn-sm bg-danger-light mr-2">Cancelled</a> </div>';
@@ -60,37 +60,42 @@ function displayAllBooking(bookings) {
               <div class="modal-dialog modal-dialog-centered modal-lg h-100">
                 <div class="modal-content">
                     <div class="modal-body text-center h-100">
-                      <form class="w-100" onSubmit={updateBooking()} >
+                      <form class="w-100" onSubmit={updateBooking(${booking.id})} >
                         <h3 class="">Edit Booking</h3>
                         <div class="row formtype">
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="customer">Customer</label>
-                              <input type="text" class="form-control" id="customer" name="customer">
+                              <label for="number_${booking.id}">Room Number</label>
+                              <input type="text" class="form-control" id="number_${booking.id}">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="sel2">Room Number</label>
-                              <input type="number" class="form-control" id="sel2" name="sellist1">
+                              <label for="capacity_room_${booking.id}">Total Members</label>
+                              <input type="number" class="form-control" id="capacity_room_${booking.id}">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="sel3">Total Members</label>
-                              <input type="number" class="form-control" id="sel3" name="sellist1">
+                              <label for="status_${booking.id}">Status </label>
+                                <select id="status_${booking.id}" class="form-control">
+                                  <option></option>
+                                  <option value="false" >Arrived</option>
+                                  <option value="true" >Cancelled</option>
+                                  <option value="null" >Pending</option>
+                                </select>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="arrival_date">Arrival Date</label>
-                                <input type="datetime-local" id="arrival_date" class="form-control">
+                              <label for="arrival_date_${booking.id}">Arrival Date</label>
+                                <input type="datetime-local" id="arrival_date_${booking.id}" class="form-control">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="departure_date">Depature Date</label>
-                                <input type="datetime-local" id="departure_date" class="form-control">
+                              <label for="departure_date_${booking.id}">Depature Date</label>
+                                <input type="datetime-local" id="departure_date_${booking.id}" class="form-control">
                             </div>
                           </div>
                         </div>
@@ -120,6 +125,21 @@ fetch(`${URL}/ReservationsWithCustomerInfo`)
     displayAllBooking(data);
   });
 
-function updateBooking() {
-  alert('Edit Booking Send !');
+function updateBooking(id) {
+  let status = document.getElementById(`status_${id}`).value;  
+  status == "null" ? status = null : null;
+
+  fetch(`${URL}/reservation/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      number: document.getElementById(`number_${id}`).value,
+      arrival_date: document.getElementById(`arrival_date_${id}`).value,
+      departure_date: document.getElementById(`departure_date_${id}`).value,
+      is_cancelled: status,
+    }),
+  }).then((res) => res);
 }
+  
