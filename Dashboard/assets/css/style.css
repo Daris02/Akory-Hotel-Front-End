@@ -479,6 +479,9 @@ button.bg-danger:hover {
   font-size: 0.875rem;
 }
 
+.black, #totalBooking{
+  color: #323232 !important;
+}
 .card_widget_header {
   font-size: 1.875rem;
 }
