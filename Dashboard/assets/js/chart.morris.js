@@ -43,21 +43,24 @@ async function getTotalCustomer() {
 }
 getTotalCustomer();
 
-function lineChart() {
+async function lineChart() {
+  let newData = [];
+  
+  const response = await fetch(`${URL}/AverageResNumberMonthsByHotelAndYear`)
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((d) => {
+        let new_d = { y: d.month, reservation: d.reservation };
+        newData.push(new_d);
+      });
+    });
+
   window.lineChart = Morris.Line({
     element: "line-chart",
-    data: [
-      { y: "2006", a: 100 },
-      { y: "2007", a: 75 },
-      { y: "2008", a: 50 },
-      { y: "2009", a: 75 },
-      { y: "2010", a: 50 },
-      { y: "2011", a: 75 },
-      { y: "2012", a: 100 },
-    ],
+    data: newData,
     xkey: "y",
-    ykeys: ["a"],
-    labels: ["Series A"],
+    ykeys: ["reservation"],
+    labels: ["Total Reservation"],
     lineColors: ["#009688"],
     lineWidth: "3px",
     resize: true,
