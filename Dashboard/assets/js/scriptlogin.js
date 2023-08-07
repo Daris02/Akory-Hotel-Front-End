@@ -15,14 +15,16 @@ function login() {
             user_email: email,
             password: pwd
         }),
-    }).then((res) => {
-        if(res.status == 401) {
-            alert('KO 👎');           
-        } else if(res.ok) {
-            alert('OK 👍');
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data.error) {
+            alert('KO 👎')
+        } else if(data.token) {
+            alert('OK 👍')
+            window.location = '../index.html';
         }
-        return res;
     });
 }
 
-// window.location = '../index.html';
+"password1"
