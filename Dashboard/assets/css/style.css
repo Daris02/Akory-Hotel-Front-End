@@ -473,7 +473,7 @@ button.bg-danger:hover {
 }
 
 .text-muted {
-  color: #333 !important;
+  color: #323232 !important;
   line-height: 0.5;
   font-weight: 200;
   font-size: 0.875rem;
@@ -541,8 +541,8 @@ button.bg-danger:hover {
 }
 
 .btn-success {
-  background-color: #009688;
-  border-color: #009688;
+  background-color: #699834;
+  border-color: #699834;
 }
 
 .btn-success:hover,
@@ -3883,7 +3883,7 @@ section.pricing {
 }
 .pricing .text-muted {
   opacity: 0.7;
-  color: #009587 !important;
+  color: #009587;
   font-size: 16px;
 }
 .pricing .btn {
