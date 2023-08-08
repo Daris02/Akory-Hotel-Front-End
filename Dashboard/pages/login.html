@@ -23,15 +23,18 @@
 						<div class="login-right-wrap">
 							<h1>Login</h1>
 							<p class="account-subtitle">Access to our dashboard</p>
-							<form onSubmit="login()">
+							<input type="text" name="" id="welcomingMessage" hidden>
+							<input type="text" name="" id="user_profile" hidden>
+							<form id="loginForm">
 								<div class="form-group">
-									<input class="form-control" type="email" placeholder="Email" id="user_email"> </div>
+									<input class="form-control" name="email" type="email" placeholder="Email" id="user_email"> </div>
 								<div class="form-group">
-									<input class="form-control" type="password" placeholder="Password" id="password"> </div>
+									<input class="form-control" name="password" type="password" placeholder="Password" id="password"> </div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-other btn-block">Login</button>
 								</div>
 							</form>
+							<div class="text-center bg-danger-light" id="message"></div>
 							<div class="text-center forgotpass"><a href="forgot-password.html">Forgot Password?</a> </div>
 							<div class="text-center dont-have">Don't have an account? <a href="register.html">Register</a></div>
 						</div>
@@ -45,7 +48,7 @@
 	<script src="../assets/js/bootstrap.min.js"></script>
 	<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="../assets/js/script.js"></script>
-	<script src="../assets/js/scriptlogin.js"></script>
+	<script src="../assets/js/scriptLogin.js"></script>
 </body>
 
 </html>
