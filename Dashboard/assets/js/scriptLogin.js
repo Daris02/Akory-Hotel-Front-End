@@ -1,8 +1,6 @@
 let status;
 
 const loginForm = document.getElementById("loginForm");
-const welcomeMessageElement = document.getElementById("welcomingMessage");
-const user_profile = document.getElementById("user_profile");
 const messageElement = document.getElementById("message");
 
 let welcome;
@@ -43,8 +41,8 @@ loginForm.addEventListener("submit", async (event) => {
     }
 });
 
-// welcomeMessageElement.innerText = welcome;
-// user_profile.innerText = user;
 
-console.log(welcome);
-console.log(welcome);
+export default shareData = {
+    welcome,
+    user
+}
