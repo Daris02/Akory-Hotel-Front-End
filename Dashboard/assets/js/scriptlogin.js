@@ -23,8 +23,8 @@ function login() {
         } else if(data.token) {
             const welcomeMessageElement = document.getElementById("welcomingMessage");
             const user_profile = document.getElementById("user_profile");
-            welcomeMessageElement.innerText = `Welcome ${data.name} ${data.last_name} !`;
-            user_profile.innerText = `${data.name} ${data.last_name}`;
+            welcomeMessageElement.innerText = `Welcome ${data.first_name} ${data.last_name} !`;
+            user_profile.innerText = `${data.first_name} ${data.last_name}`;
             alert('OK 👍')
             window.location.replace('../index.html');
         }
