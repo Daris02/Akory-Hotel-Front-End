@@ -138,6 +138,7 @@ fetch(`${URL}/ReservationsWithCustomerInfo`)
         status =
           '<span class="badge badge-pill bg-danger badge">CANCELLED</span>';
       }
+      
       allBooking.append(
         `
           <tr>
@@ -165,10 +166,4 @@ fetch(`${URL}/ReservationsWithCustomerInfo`)
     });
   });
 
-
-// import shareData from "./scriptLogin.js";
-// console.log(shareData.welcome);
-// console.log(shareData.user);
-
-// welcomeMessageElement.innerText = welcome;
-// user_profile.innerText = user;
+  
