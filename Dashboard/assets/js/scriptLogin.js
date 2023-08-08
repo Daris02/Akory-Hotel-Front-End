@@ -1,11 +1,5 @@
 let status;
 
-const loginForm = document.getElementById("loginForm");
-const messageElement = document.getElementById("message");
-
-let welcome;
-let user;
-
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -27,8 +21,6 @@ loginForm.addEventListener("submit", async (event) => {
         const data = await response.json();
 
         if (response.ok) {
-            welcome = `Welcome ${data.first_name} ${data.last_name} !`;
-            user = `${data.first_name} ${data.last_name}`;
             window.location.replace('../index.html');
         } else {
             messageElement.textContent = "Authification Failed!";
@@ -40,9 +32,3 @@ loginForm.addEventListener("submit", async (event) => {
         console.error(error);
     }
 });
-
-
-export default shareData = {
-    welcome,
-    user
-}
