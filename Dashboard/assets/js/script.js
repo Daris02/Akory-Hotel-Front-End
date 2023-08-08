@@ -176,3 +176,6 @@
     }
   });
 })(jQuery);
+function Logout(){
+  window.location.replace("login.html");
+}
