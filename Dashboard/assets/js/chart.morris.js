@@ -1,5 +1,9 @@
 const URL = "http://localhost:8000";
 
+const welcomeMessageElement = document.getElementById("welcomingMessage");
+const user_profile = document.getElementById("user_profile");
+
+
 $(document).ready(function () {
   lineChart();
   donutChart();
@@ -160,3 +164,11 @@ fetch(`${URL}/ReservationsWithCustomerInfo`)
       );
     });
   });
+
+
+// import shareData from "./scriptLogin.js";
+// console.log(shareData.welcome);
+// console.log(shareData.user);
+
+// welcomeMessageElement.innerText = welcome;
+// user_profile.innerText = user;
