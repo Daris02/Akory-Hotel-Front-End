@@ -21,10 +21,15 @@ function login() {
         if (data.error) {
             alert('KO 👎')
         } else if(data.token) {
+            const welcomeMessageElement = document.getElementById("welcomingMessage");
+            const user_profile = document.getElementById("user_profile");
+            welcomeMessageElement.innerText = `Welcome ${data.name} ${data.last_name} !`;
+            user_profile.innerText = `${data.name} ${data.last_name}`;
             alert('OK 👍')
-            window.location = '../index.html';
+            window.location.replace('../index.html');
         }
-    });
+    }).catch((error) => {
+        console.error("Erreur lors de la requête Fetch:", error);
+        alert("Une erreur est survenue lors de la requête. Veuillez réessayer.");
+      });
 }
-
-"password1"
