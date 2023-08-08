@@ -1,5 +1,7 @@
 let status;
 
+const messageElement = document.getElementById("message");
+
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
